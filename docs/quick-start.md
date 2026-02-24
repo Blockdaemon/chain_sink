@@ -24,7 +24,7 @@ curl -X POST "https://svc.blockdaemon.com/streaming/v2/targets" \
         "max_buffer_count": 100,
         "name": "Chain sink websocket quick start",
         "settings": {
-            "noack":false
+            "mode":"ack"
         },
         "type": "websocket"  
       }'
@@ -40,7 +40,7 @@ The response will contain the target ID. You will need to use this target ID in 
     "max_buffer_count": 100,
     "name": "Chain sink websocket quick start",
     "settings": {
-        "noack": false
+        "mode": "ack"
     },
     "status": "active",
     "status_since": "2026-01-28T11:01:21.931253Z",
@@ -50,8 +50,8 @@ The response will contain the target ID. You will need to use this target ID in 
 ```
 ## Understanding acknowledgement mode
 Chain watch supports two modes of operation: acknowledgement mode and no acknowledgement mode.
-* `settings.noack=true`: no acknowledgement mode. In this mode the client will not have to send any acknowledgement messages to the server. The server will send the next message immediately after the previous message is received. This also means that if the client fails to process the message, the message will be lost. This mode will achieve the highest throughput, but is not recommended when data integrity is important.
-* `settings.noack=false`: acknowledgement mode. In this mode the client has to send an acknowledgement message for each message received from the server. The server will only send the next message after the acknowledgement message is received. This mode is more reliable, but slower than no acknowledgement mode.
+* `settings.mode="noack"`: no acknowledgement mode. In this mode the client will not have to send any acknowledgement messages to the server. The server will send the next message immediately after the previous message is received. This also means that if the client fails to process the message, the message will be lost. This mode will achieve the highest throughput, but is not recommended when data integrity is important.
+* `settings.mode="ack"`: acknowledgement mode. In this mode the client has to send an acknowledgement message for each message received from the server. The server will only send the next message after the acknowledgement message is received. This mode is more reliable, but slower than no acknowledgement mode.
 
 Chain sink supports both modes of operation, the default is acknowledgement mode. When configuring chain sink it is important that the target mode set in chain sink matches the target mode set in Chain Watch.
 
