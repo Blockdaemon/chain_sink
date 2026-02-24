@@ -8,3 +8,6 @@ build-release-on-darwin:
 	GOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -o out/chain_sink_$(VERSION)_darwin_arm64 ./cmd/chain_sink
 	sha1 out/chain_sink_$(VERSION)_linux_amd64 out/chain_sink_$(VERSION)_darwin_arm64 > out/chain_sink_$(VERSION).sha1
 	zip -j out/chain_sink_$(VERSION).zip out/chain_sink_$(VERSION)_linux_amd64 out/chain_sink_$(VERSION)_darwin_arm64 out/chain_sink_$(VERSION).sha1
+
+build:
+	go build -o out/chain_sink ./cmd/chain_sink
