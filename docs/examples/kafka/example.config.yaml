@@ -1,0 +1,20 @@
+stream:
+  url: "wss://svc.blockdaemon.com/streaming/v2/targets/<target_id>/websocket"
+  mode: "ack"
+  api_key: "<api_key>"
+
+logger:
+  level: "debug"
+
+adapter:
+  type: "kafka"
+  kafka:
+    producer:
+      brokers:
+        - "localhost:9092"
+      topic: "chain_sink_example"
+    create_topic: true
+    topic_name: "chain_sink_example"
+    num_partitions: 1
+    replication_factor: 1
+    admin_host: "localhost:9092"

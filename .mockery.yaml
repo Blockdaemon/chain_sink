@@ -1,0 +1,10 @@
+dir: '{{.InterfaceDir}}/mock_{{.SrcPackageName}}'
+pkgname: mock_{{.SrcPackageName}}
+filename: '{{.InterfaceName | camelcase }}.go'
+template: testify
+template-data:
+  unroll-variadic: true
+packages:
+  github.com/Blockdaemon/chain_sink/internal/stream:
+    interfaces:
+      Adapter: {}
